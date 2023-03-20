@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class WelcomeController extends Controller
     {
         return view(
             'welcome',
-            ['products' => Product::all()]
+            ['products' => Product::get(['name'])],
+            ['categories' => Category::get(['name'])]
         );
     }
 
