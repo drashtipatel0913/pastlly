@@ -16,7 +16,7 @@ class WelcomeController extends Controller
         return view(
             'welcome',
             ['products' => Product::get(['name','image'])],
-            ['categories' => Category::get(['name'])]
+            ['categories' => Category::get(['name','slug'])]
         );
     }
 

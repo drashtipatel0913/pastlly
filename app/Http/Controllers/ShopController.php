@@ -20,15 +20,18 @@ class ShopController extends Controller
             $products = Product::whereHas('categories', function ($query) {
                 $query->where('slug', request()->category);
             })->get();
+            $categoryName = $categories->where('slug', request()->category)->first()->name;
         } else {
             $products = Product::all();
+            $categoryName = 'All';
         }
 
         return view(
             'shop',
             [
                 'products' => $products,
-                'categories' => $categories
+                'categories' => $categories,
+                'categoryName' => $categoryName
             ]
         );
     }

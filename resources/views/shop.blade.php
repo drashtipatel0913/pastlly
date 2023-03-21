@@ -1,15 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Shop</title>
-</head>
+<x-header />
 
 <body>
     <h2>This is Shop</h2>
+
+    <h1>Shop > {{ $categoryName }}</h1>
 
     @foreach ($categories as $category)
         <a href="{{ route('shop', ['category' => $category['slug']]) }}">{{ $category['name'] }}</a>
@@ -19,6 +15,7 @@
         {{ $product['name'] }}
     @endforeach
 
+    <x-scripts />
 </body>
 
 </html>
