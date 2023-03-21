@@ -3,6 +3,7 @@
 <x-header />
 
 <body>
+    <x-navbar />
     <h2>This is Shop</h2>
 
     <h1>Shop > {{ $categoryName }}</h1>

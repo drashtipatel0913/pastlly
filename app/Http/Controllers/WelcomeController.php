@@ -15,10 +15,18 @@ class WelcomeController extends Controller
     {
         return view(
             'welcome',
-            ['products' => Product::get(['name','image'])],
-            ['categories' => Category::get(['name','slug'])]
+            [
+                'products' => Product::select(['name', 'image', 'details'])
+                    ->inRandomOrder()
+                    ->take(5)
+                    ->get()
+            ],
+            [
+                'categories' => Category::get(['name', 'slug'])
+            ]
         );
     }
+
 
     /**
      * Show the form for creating a new resource.
