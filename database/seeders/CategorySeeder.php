@@ -13,10 +13,10 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             Category::create([
                 'name' => fake()->word(),
-                'slug' => 'CLUG' . $i,
+                'slug' => 'C-00' . $i,
                 'category_code' => 'CAT-' . $i,
                 'isAvailable' => fake()->boolean(90),
             ]);

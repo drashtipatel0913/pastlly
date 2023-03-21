@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
             $category = Category::all()->random();
             Product::create([
                 'name' => fake()->word(),
-                'slug' => 'SLUG-' . $i,
+                'slug' => $category->slug,
                 'details' => fake()->sentence(),
                 'product_code' => $category->category_code . '00' . $i,
                 'price' => rand(500, 999),
