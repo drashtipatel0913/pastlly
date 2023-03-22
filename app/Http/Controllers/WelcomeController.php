@@ -16,13 +16,15 @@ class WelcomeController extends Controller
         return view(
             'welcome',
             [
-                'products' => Product::select(['name', 'image', 'details'])
+                'featured' => Product::select(['name', 'image', 'details'])
                     ->inRandomOrder()
                     ->take(5)
                     ->get()
             ],
             [
-                'categories' => Category::get(['name', 'slug'])
+                'categories' => Category::take(4)
+                    ->inRandomOrder()
+                    ->get(['name', 'slug'])
             ]
         );
     }

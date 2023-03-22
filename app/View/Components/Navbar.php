@@ -26,13 +26,9 @@ class Navbar extends Component
         return view(
             'components.navbar',
             [
-                'products' => Product::select(['name', 'image', 'details'])
+                'categories' => Category::take(4)
                     ->inRandomOrder()
-                    ->take(5)
-                    ->get()
-            ],
-            [
-                'categories' => Category::get(['name', 'slug'])
+                    ->get(['name', 'slug']),
             ]
         );
     }

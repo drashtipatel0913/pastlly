@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en">
-    <x-header />
+<x-header />
 
 <body>
     <x-navbar />
-    <div class="container text-center">
+    
+    <div class="container-fluid text-center">
         <div class="row row-cols-2 m-3 row-cols-lg-5 g-2 g-lg-3">
-            @foreach ($products as $product)
+            @foreach ($featured as $product)
                 <div class="col">
                     <div class="card">
                         <img src="{{ URL::asset($product['image']) }}" class="card-img-top"
