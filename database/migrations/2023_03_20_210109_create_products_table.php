@@ -17,14 +17,13 @@ return new class extends Migration
             $table->string('slug');
             $table->string('details');
             $table->string('product_code');
-            $table->string('image')->default('/assests/no_image.png');
+            $table->string('image')->default('/assests/Images/no_image.png');
             $table->unsignedBigInteger('price');
             $table->boolean('isAvailable')->default(true);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
-
     /**
      * Reverse the migrations.
      */

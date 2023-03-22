@@ -1,10 +1,9 @@
 <!doctype html>
 <html lang="en">
-<x-header />
+    <x-header />
 
 <body>
     <x-navbar />
-
     <div class="container text-center">
         <div class="row row-cols-2 m-3 row-cols-lg-5 g-2 g-lg-3">
             @foreach ($products as $product)
