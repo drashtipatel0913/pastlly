@@ -39,6 +39,8 @@
                                     <p class="card-text text-truncate">{{ $product['details'] }}</p>
                                     <p class="card-text">{{ '$ ' . $product['price'] }}</p>
                                     <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+                                    <a href="{{ route('shop.show', ['product' => $product['slug']]) }}"
+                                        class="btn btn-outline-dark">View</a>
                                 </div>
                             </div>
                         </div>

@@ -21,3 +21,4 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
  *SHOP
  */
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/shop/{product:slug}', [ShopController::class, 'show'])->name('shop.show');

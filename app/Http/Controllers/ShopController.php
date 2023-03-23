@@ -49,7 +49,6 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -57,7 +56,13 @@ class ShopController extends Controller
      */
     public function show(Product $product)
     {
-        //
+
+        $category = $product->categories->first()->name;
+
+        return view('show', [
+            'product' => $product,
+            'category' => $category,
+        ]);
     }
 
     /**
