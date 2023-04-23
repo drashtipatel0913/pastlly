@@ -15,16 +15,38 @@ class ShopController extends Controller
     {
 
         $categories = Category::all();
-
         if (request()->category) {
-            $products = Product::whereHas('categories', function ($query) {
-                $query->where('slug', request()->category);
-            })->get();
-            $categoryName = $categories->where('slug', request()->category)->first()->name;
+            if (!request()->sort) {
+                $products = Product::whereHas('categories', function ($query) {
+                    $query->where('slug', request()->category);
+                })->get();
+                $categoryName = $categories->where('slug', request()->category)->first()->name;
+            } else {
+                $products = Product::whereHas('categories', function ($query) {
+                    $query->where('slug', request()->category);
+                });
+                $categoryName = $categories->where('slug', request()->category)->first()->name;
+                if (request()->sort == 'low_high') {
+                    $products = $products->orderBy('price', 'asc')->get();
+                } else {
+                    $products = $products->orderBy('price', 'desc')->get();
+                }
+            }
         } else {
             $products = Product::all();
             $categoryName = 'All';
         }
+
+
+        // if (request()->category) {
+        //     $products = Product::whereHas('categories', function ($query) {
+        //         $query->where('slug', request()->category);
+        //     })->get();
+        //     $categoryName = $categories->where('slug', request()->category)->first()->name;
+        // } else {
+        //     $products = Product::all();
+        //     $categoryName = 'All';
+        // }
 
         return view(
             'shop',

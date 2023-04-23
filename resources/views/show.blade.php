@@ -4,7 +4,7 @@
 
 <body>
     <x-navbar />
-    <div class="container-fluid">
+    <div class="text-uppercase container-fluid">
         <div style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb border-bottom p-3 my-0">
                 <li class="breadcrumb-item">
@@ -14,10 +14,12 @@
                     <a class="text-decoration-none text-dark-emphasis p-1" href="{{ route('shop') }}">Shop</a>
                 </li>
                 <li class="breadcrumb-item active text-dark-emphasis" aria-current="page">
-                    <span>{{ $category }}</span>
+                    <a class="text-decoration-none text-dark-emphasis p-1"
+                        href="{{ url()->previous() }}">{{ $category }}</a>
                 </li>
-                <li class="breadcrumb-item active text-dark-emphasis" aria-current="page"><span
-                        class="border-bottom border-dark border-2">{{ $product->name }}</span></li>
+                <li class="breadcrumb-item active text-dark-emphasis" aria-current="page">
+                    <span class="border-bottom border-dark border-3">{{ $product->name }}</span>
+                </li>
             </ol>
         </div>
         <div class="container mt-4">
