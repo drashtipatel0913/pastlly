@@ -1,9 +1,8 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('welcome') }}">
-            <img src="{{ URL::asset('assests/Images/logo.png') }}" alt="Pastly-Logo" width="100"
-                class="d-inline-block ms-5">
-            <span class="align-middle">Pastly</span>
+        <a class="navbar-brand fs-2 m-2 ms-5" href="{{ route('welcome') }}">
+            {{-- <img src="{{ asset('assests/Images/logo.gif') }}" width="145" class="d-inline-block ms-5 mt-4"> --}}
+            Pastly
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,14 +30,10 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
+            <form class="d-flex me-5" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-secondary" type="submit">Search</button>
             </form>
-            <div class="text-muted text-uppercase mx-5">
-                Hii User
-                <i class="bi bi-hearts h4 text-danger"></i>
-            </div>
         </div>
     </div>
 </nav>

@@ -19,7 +19,7 @@
                 <li class="breadcrumb-item active text-dark-emphasis" aria-current="page"><span
                         class="border-bottom border-dark border-2">{{ $product->name }}</span></li>
             </ol>
-
+            @currency(10000)
         </div>
     </div>
     <x-scripts />

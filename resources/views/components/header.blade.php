@@ -8,4 +8,5 @@
 
     <link href="{{ URL::asset('assests/bootstrap-icons/font/bootstrap-icons.css') }}" rel="stylesheet">
 
+    <link href="{{ URL::asset('assests/style.css') }}" rel="stylesheet">
 </head>

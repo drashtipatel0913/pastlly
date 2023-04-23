@@ -37,9 +37,9 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $product['name'] }}</h5>
                                     <p class="card-text text-truncate">{{ $product['details'] }}</p>
-                                    <p class="card-text">{{ '$ ' . $product['price'] }}</p>
+                                    <p class="card-text">@currency($product['price'])</p>
                                     <a href="#" class="btn btn-outline-dark">Add to Cart</a>
-                                    <a href="{{ route('shop.show', ['product' => $product['slug']]) }}"
+                                    <a href="{{ route('shop.show', ['product' => $product['id']]) }}"
                                         class="btn btn-outline-dark">View</a>
                                 </div>
                             </div>
