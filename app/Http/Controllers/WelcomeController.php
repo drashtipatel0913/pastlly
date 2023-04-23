@@ -16,7 +16,7 @@ class WelcomeController extends Controller
         return view(
             'welcome',
             [
-                'featured' => Product::select(['name', 'image', 'details'])
+                'featured' => Product::select(['id', 'name', 'image', 'details'])
                     ->inRandomOrder()
                     ->take(5)
                     ->get()
