@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,9 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
  */
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/shop/{product:id}', [ShopController::class, 'show'])->name('shop.show');
+
+/**
+ *CART
+ */
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart');

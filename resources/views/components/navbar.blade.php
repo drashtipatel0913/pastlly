@@ -30,14 +30,17 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex me-5" role="search">
+            <form class="d-flex me-4" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-secondary" type="submit">Search</button>
             </form>
-            {{-- <div class="text-muted text-uppercase mx-5">
-                Hii User
-                <i class="bi bi-hearts h4 text-danger"></i>
-            </div> --}}
+            <button type="button" class="me-5 btn btn-light position-relative">
+                <i class="bi bi-basket-fill"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                    1
+                    <span class="visually-hidden">unread messages</span>
+                </span>
+            </button>
         </div>
     </div>
 </nav>
