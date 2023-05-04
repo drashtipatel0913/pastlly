@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Cart;
 
 use App\Http\Controllers\Controller;
+use App\Models\CartItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -12,7 +14,19 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('Cart/cartIndex');
+        $cart = session()->get('cart', []);
+        $cartItems = collect($cart)->map(function ($item) {
+            $product = Product::findOrFail($item['product_id']);
+            $item['product'] = $product;
+            return $item;
+        });
+
+        $totalAmount = session()->get('totalAmount', 0);
+
+        return view('Cart/cartIndex', [
+            'cartItems' => $cartItems,
+            'totalAmount' => $totalAmount
+        ]);
     }
 
     /**
@@ -28,7 +42,26 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $product = Product::findOrFail($request->id);
+        $cart = session()->get('cart', []);
+        $cartItem = collect($cart)->firstWhere('product_id', $product->id);
+
+        if ($cartItem) {
+            $cartItem['quantity'] += $request->quantity;
+        } else {
+            $cartItem = [
+                'product_id' => $product->id,
+                'quantity' => 1,
+                'price' => $product->price
+            ];
+            $cart[] = $cartItem;
+        }
+
+        session()->put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Item added to cart successfully!');
+
     }
 
     /**
@@ -52,7 +85,21 @@ class CartController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // $cart = session()->get('cart', []);
+        // $cartItem = collect($cart)->firstWhere('product_id', $id);
+
+        // if ($cartItem) {
+        //     $cartItem['quantity'] = $request->quantity;
+        // }
+
+        // $totalAmount = collect($cart)->sum(function ($item) {
+        //     return $item['quantity'] * $item['price'];
+        // });
+
+        // session()->put('cart', $cart);
+        // session()->put('totalAmount', $totalAmount);
+
+        // return redirect()->route('cart.index');
     }
 
     /**
@@ -60,6 +107,23 @@ class CartController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $cart = session()->get('cart', []);
+        $index = collect($cart)->search(function ($cartItem) use ($id) {
+            return $cartItem['product_id'] == $id;
+        });
+
+        if ($index !== false) {
+            array_splice($cart, $index, 1);
+        }
+
+        session()->put('cart', $cart);
+
+        return redirect()->route('cart.index');
+
+        $cartItem = CartItem::findOrFail($id);
+        $cartItem->delete();
+
+        return redirect()->route('cart.index');
     }
 }

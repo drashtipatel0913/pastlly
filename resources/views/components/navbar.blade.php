@@ -34,13 +34,14 @@
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-secondary" type="submit">Search</button>
             </form>
-            <button type="button" class="me-5 btn btn-light position-relative">
-                <i class="bi bi-basket-fill"></i>
+            <button type="button" class="me-3 btn btn-light position-relative">
+                <i class="bi bi-heart"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                     1
                     <span class="visually-hidden">unread messages</span>
                 </span>
             </button>
+            @livewire('cart-counter')
         </div>
     </div>
 </nav>

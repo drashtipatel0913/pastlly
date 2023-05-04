@@ -22,10 +22,17 @@
                 </li>
             </ol>
         </div>
-        <div class="container mt-4">
+        <div class="row justify-content-center mb-0">
+            @if (session('success'))
+                <div class="alert alert-light bg-transparent text-center p-1 mt-3 mb-0 w-25 border-0">
+                    {{ session('success') }}
+                </div>
+            @endif
+        </div>
+        <div class="container mt-2">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-10">
-                    <div class="card">
+                    <div class="card border-0">
                         <div class="row">
                             <div class="col-md-5">
                                 <div id="carouselExampleAutoplaying" class="carousel slide p-3" data-bs-ride="carousel">
@@ -53,39 +60,51 @@
                                 </div>
                             </div>
                             <div class="col-md-7">
-                                <div class="p-4 mt-5">
-                                    <div class="float-end">
-                                        <i class="bi bi-basket-fill text-muted h4"></i>
+                                <div class="p-4 mt-3">
+                                    <i class="bi bi-basket-fill text-muted h4 py-5"></i>
+                                    <form method="POST" action="{{ route('cart.store') }}">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $product->id }}">
+                                        <input type="hidden" name="name" value="{{ $product->name }}">
+                                        <input type="hidden" name="price" value="{{ $product->price }}">
+                                        <div class="my-3">
+                                            <span class="text-uppercase text-muted brand">{{ $category }}</span>
+                                            <h5 class="text-uppercase my-3 fs-2">{{ $product->name }}</h5>
+                                            <div class="fs-3 price d-flex flex-row align-items-center"> <span
+                                                    class="act-price">@currency($product->price)</span>
+                                            </div>
+                                        </div>
+                                        <p class="about">{{ $product->details }}</p>
+                                        @if ($product->isAvailable)
+                                            <div class="sizes mt-5">
+                                                <span class="text-success text-uppercase">available<span>
+                                                        <i class="fs-4 align-middle bi bi-emoji-smile"></i>
+                                            </div>
+                                            <div class="cart mt-3 align-items-center">
+                                                @if (collect($cart)->where('product_id', $product->id)->count())
+                                                    <button type="submit"
+                                                        class="btn btn-primary text-uppercase mr-2 px-4" disabled>
+                                                        already in Basket
+                                                    </button>
+                                                @else
+                                                    <button type="submit"
+                                                        class="btn btn-primary text-uppercase mr-2 px-4">
+                                                        Add to basket
+                                                    </button>
+                                                @endif
+                                            </div>
+                                    </form>
+                                @else
+                                    <div class="sizes mt-5">
+                                        <span class="text-danger text-uppercase">i'm sorry! this product isn't
+                                            available right know<span>
+                                                <i class="fs-4 align-middle bi bi-emoji-frown"></i>
                                     </div>
-                                    <div class="mb-3">
-                                        <span class="text-uppercase text-muted brand">{{ $category }}</span>
-                                        <h5 class="text-uppercase my-3 fs-2">{{ $product->name }}</h5>
-                                        <div class="fs-3 price d-flex flex-row align-items-center"> <span
-                                                class="act-price">@currency($product->price)</span>
-                                        </div>
+                                    <div class="cart mt-3 align-items-center">
+                                        <button class="btn btn-primary text-uppercase mr-2 px-4" role="button"
+                                            disabled>Add to
+                                            cart</button>
                                     </div>
-                                    <p class="about">{{ $product->details }}</p>
-                                    @if ($product->isAvailable)
-                                        <div class="sizes mt-5">
-                                            <span class="text-success text-uppercase">available<span>
-                                                    <i class="fs-4 align-middle bi bi-emoji-smile"></i>
-                                        </div>
-                                        <div class="cart mt-3 align-items-center">
-                                            <a class="btn btn-primary text-uppercase mr-2 px-4" href="#"
-                                                role="button">Add to
-                                                cart</a>
-                                        </div>
-                                    @else
-                                        <div class="sizes mt-5">
-                                            <span class="text-danger text-uppercase">i'm sorry! this product isn't
-                                                available right know<span>
-                                                    <i class="fs-4 align-middle bi bi-emoji-frown"></i>
-                                        </div>
-                                        <div class="cart mt-3 align-items-center">
-                                            <button class="btn btn-primary text-uppercase mr-2 px-4" role="button"
-                                                disabled>Add to
-                                                cart</button>
-                                        </div>
                                     @endif
                                     <div class="mt-4 fs-3">
                                         <i class="bi bi-heart align-middle text-muted"></i>

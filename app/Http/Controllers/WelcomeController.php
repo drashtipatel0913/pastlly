@@ -13,20 +13,14 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-        return view(
-            'welcome',
-            [
-                'featured' => Product::select(['id', 'name', 'image', 'details'])
-                    ->inRandomOrder()
-                    ->take(5)
-                    ->get()
-            ],
-            [
-                'categories' => Category::take(4)
-                    ->inRandomOrder()
-                    ->get(['name', 'slug'])
-            ]
-        );
+        $featured = Product::select(['id', 'name', 'image', 'details'])
+            ->inRandomOrder()
+            ->take(5)
+            ->get();
+        $categories = Category::take(4)
+            ->inRandomOrder()
+            ->get(['name', 'slug']);
+        return view('welcome', compact('featured', 'categories'));
     }
 
 

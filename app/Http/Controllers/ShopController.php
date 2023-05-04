@@ -33,19 +33,13 @@ class ShopController extends Controller
             }
         } else {
             $products = Product::all();
+            if (request()->sort == 'low_high') {
+                $products = $products->sortBy('price');
+            } else {
+                $products = $products->sortByDesc('price');
+            }
             $categoryName = 'All';
         }
-
-
-        // if (request()->category) {
-        //     $products = Product::whereHas('categories', function ($query) {
-        //         $query->where('slug', request()->category);
-        //     })->get();
-        //     $categoryName = $categories->where('slug', request()->category)->first()->name;
-        // } else {
-        //     $products = Product::all();
-        //     $categoryName = 'All';
-        // }
 
         return view(
             'shop',
@@ -77,12 +71,13 @@ class ShopController extends Controller
      */
     public function show(Product $product)
     {
-
+        $cart = session('cart');
         $category = $product->categories->first()->name;
 
         return view('show', [
             'product' => $product,
             'category' => $category,
+            'cart' => $cart
         ]);
     }
 
