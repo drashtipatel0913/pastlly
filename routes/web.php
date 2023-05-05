@@ -29,6 +29,6 @@ Route::get('/shop/{product:id}', [ShopController::class, 'show'])->name('shop.sh
  */
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart', [CartController::class, 'store'])
+Route::post('/cart/store', [CartController::class, 'store'])
    ->name('cart.store');
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');

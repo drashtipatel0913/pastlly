@@ -41,13 +41,10 @@ class ShopController extends Controller
             $categoryName = 'All';
         }
 
+        $cart = session('cart');
+
         return view(
-            'shop',
-            [
-                'products' => $products,
-                'categories' => $categories,
-                'categoryName' => $categoryName
-            ]
+            'shop', compact('products','categories','categoryName','cart')  
         );
     }
 

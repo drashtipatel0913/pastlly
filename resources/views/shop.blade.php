@@ -49,18 +49,18 @@
                     <div class="row text-center">
                         <div class="row">
                             <div class="dropdown">
-                                <button class="btn btn-secondary float-end mt-3 dropdown-toggle" type="button"
+                                <button class="btn btn-dark btn-sm px-4 float-end mt-3 dropdown-toggle" type="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Price
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li>
-                                        <a class="dropdown-item{{ Request::get('sort') === 'low_high' ? ' active' : '' }}"
+                                        <a class="text-light dropdown-item{{ Request::get('sort') === 'low_high' ? ' active' : '' }}"
                                             href="{{ route('shop', ['category' => request()->category, 'sort' => 'low_high']) }}">Low
                                             to High</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item{{ Request::get('sort') === 'high_low' ? ' active' : '' }}"
+                                        <a class="text-light dropdown-item{{ Request::get('sort') === 'high_low' ? ' active' : '' }}"
                                             href="{{ route('shop', ['category' => request()->category, 'sort' => 'high_low']) }}">High
                                             to Low</a>
                                     </li>
@@ -69,16 +69,32 @@
                         </div>
                         @foreach ($products as $product)
                             <div class="col-3">
-                                <div class="card p-3 border-0">
+                                <div class="card p-2 border-0">
                                     <img src="{{ URL::asset($product['image']) }}" class="card-img-top"
                                         alt="{{ $product['name'] }}">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $product['name'] }}</h5>
                                         <p class="card-text text-truncate">{{ $product['details'] }}</p>
                                         <p class="card-text">@currency($product['price'])</p>
-                                        <a href="#" class="btn btn-outline-dark">Add to Cart</a>
-                                        <a href="{{ route('shop.show', ['product' => $product['id']]) }}"
-                                            class="btn btn-outline-dark">View</a>
+                                        <div class="d-flex">
+                                            <a href="{{ route('shop.show', ['product' => $product['id']]) }}"
+                                                class="btn btn-outline-dark px-3">View</a>
+                                            <form method="POST" action="{{ route('cart.store') }}">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                                @if (collect($cart)->where('product_id', $product->id)->count())
+                                                    <button type="submit" class="btn btn-dark text-uppercase ms-2 px-2"
+                                                        disabled>
+                                                        already in Basket
+                                                    </button>
+                                                @else
+                                                    <button type="submit"
+                                                        class="btn btn-dark text-uppercase ms-2 px-3 ">
+                                                        Add to basket
+                                                    </button>
+                                                @endif
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
