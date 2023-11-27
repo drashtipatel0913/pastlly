@@ -1,2 +1,2 @@
 # pastlly
-An Ecommerce Website
+An Ecommerce Website developed with Laravel
